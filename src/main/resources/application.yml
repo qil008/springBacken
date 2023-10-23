@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uberinterndemo
+    username: root
+    password: 287515GGgantic_
+
+
+#开启日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# MQTT Configurations
+ximo:
+  mqtt:
+    host: tcp://127.0.0.1:1883
+    clientid: mqttId2
+    username: admin
+    password: public
+    timeout: 1000
+    keepalive: 10
+
