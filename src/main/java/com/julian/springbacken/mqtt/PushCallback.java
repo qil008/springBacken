@@ -24,21 +24,11 @@ public class PushCallback implements MqttCallback {
         }
 
     }
-
-    /**
-     * 发送消息，消息到达后处理方法
-     * @param token
-     */
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
 
     }
 
-    /**
-     * 订阅主题接收到消息处理方法
-     * @param topic
-     * @param message
-     */
     @Override
     public void messageArrived(String topic, MqttMessage message) {
         // subscribe后得到的消息会执行到这里面,这里在控制台有输出

@@ -20,21 +20,6 @@ public class MqttSubClient {
         subscribe("gd-sz", 2);
     }
 
-    /**
-     * 订阅某个主题，qos默认为0
-     *
-     * @param topic
-     */
-    public void subscribe(String topic) {
-        subscribe(topic, 0);
-    }
-
-    /**
-     * 订阅某个主题
-     *
-     * @param topic 主题名
-     * @param qos
-     */
     public void subscribe(String topic, int qos) {
         try {
             MqttClient client = MqttPushClient.getClient();

@@ -16,12 +16,6 @@ public class MqttController {
     @Autowired
     private MqttSubClient mqttSubClient;
 
-
-    @RequestMapping("testPublish")
-    public void testPublishMessage() {
-        mqttPushClient.publish("test_queue","这是一条测试消息");
-    }
-
     @RequestMapping("Publish")
     public void PublishMessage(@RequestParam int qos,
                                     @RequestParam boolean retained,

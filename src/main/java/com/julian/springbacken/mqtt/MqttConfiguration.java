@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-/**
- * mqtt配置类，获取mqtt连接
- */
 @Component
 @Configuration
 @ConfigurationProperties(MqttConfiguration.PREFIX)
@@ -16,7 +13,6 @@ public class MqttConfiguration {
 
     @Autowired
     private MqttPushClient mqttPushClient;
-    //指定配置文件application-local.properties中的属性名前缀
     public static final String PREFIX = "ximo.mqtt";
     private String host;
     private String clientId;
@@ -81,11 +77,6 @@ public class MqttConfiguration {
     public void setHost(String host) {
         this.host = host;
     }
-
-    /**
-     * 连接至mqtt服务器，获取mqtt连接
-     * @return
-     */
 
     @Bean
     public MqttPushClient getMqttPushClient() {

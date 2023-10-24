@@ -36,7 +36,7 @@ public class MqttPushClient{
             options.setKeepAliveInterval(keepalive);
             MqttPushClient.setClient(client);
             try {
-                //设置回调类
+                //回调
                 client.setCallback(pushCallback);
                 //client.connect(options);
                 IMqttToken iMqttToken = client.connectWithResult(options);
@@ -54,27 +54,6 @@ public class MqttPushClient{
 
     }
 
-
-
-
-    /**
-     * 发布，默认qos为0，非持久化
-     *
-     * @param topic 主题名
-     * @param pushMessage 消息
-     */
-    public void publish(String topic, String pushMessage) {
-        publish(0, false, topic, pushMessage);
-    }
-
-    /**
-     * 发布
-     *
-     * @param qos
-     * @param retained
-     * @param topic
-     * @param pushMessage
-     */
     public void publish(int qos, boolean retained, String topic, String pushMessage) {
         MqttMessage message = new MqttMessage();
         message.setQos(qos);
