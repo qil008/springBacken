@@ -109,6 +109,13 @@ public class RideServiceImpl extends ServiceImpl<RideMapper, RideEntity> impleme
         }
     }
 
+    @Override
+    public RideEntity getRideByID(Long rid){
+        return getById(rid);
+    }
+
+
+
 
 }
 

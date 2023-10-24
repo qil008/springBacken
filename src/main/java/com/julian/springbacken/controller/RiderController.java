@@ -1,4 +1,7 @@
 package com.julian.springbacken.controller;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.julian.springbacken.Entity.RideEntity;
 import com.julian.springbacken.response.ApiResponse;
 import com.julian.springbacken.service.RideService;
 import com.julian.springbacken.service.UserService;
@@ -76,6 +79,17 @@ public class RiderController {
     @GetMapping("/inquire")
     // 查询订单状态
     public ApiResponse getRideStatus(@RequestParam Long rid) {
-        return rideService.getRide(rid);
+        RideEntity ride = rideService.getRideByID(rid);
+        if(ride == null){
+            return new ApiResponse("404", "Ride not found");
+
+        }
+        try {
+            String jsonData = new ObjectMapper().writeValueAsString(ride);
+            return new ApiResponse("0", "success");
+        } catch (JsonProcessingException e) {
+            return new ApiResponse("010", "Failed to convert user to JSON: " + e.getMessage());
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.julian.springbacken.Entity.OrderEntity;
 import com.julian.springbacken.Entity.RideEntity;
 import com.julian.springbacken.mapper.OrderMapper;
+import com.julian.springbacken.response.ApiResponse;
 import com.julian.springbacken.service.OrderService;
 import com.julian.springbacken.service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
         queryWrapper.in("rid", rideIds).eq("Status", "Unpaid").last("LIMIT 1");
 
         return Optional.ofNullable(orderMapper.selectOne(queryWrapper));
+    }
+
+    @Override
+    public Long createOrder(Long rid) throws Exception{
+        RideEntity ride = rideService.getRideByID(rid);
+        // TODO: 通过ride信息添加计费逻辑
+        OrderEntity order = new OrderEntity();
+        order.setRid(rid);
+        order.setStatus("Paid");
+        try {
+            save(order);
+            return order.getOid();
+        } catch (Exception e) {
+            throw new Exception("Failed to create ride: " + e.getMessage(), e);
+        }
     }
 }

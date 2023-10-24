@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface OrderService extends IService<OrderEntity> {
     Optional<OrderEntity> getFirstUnpaidOrderByUserId(Long uid);
+    Long createOrder(Long rid) throws Exception;
 
 }

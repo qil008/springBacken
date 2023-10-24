@@ -34,25 +34,26 @@ public class UserController {
     }
 
     // PUT /user/{uid}
-    @PutMapping("update/{uid}")
-    public ApiResponse updateUser(@PathVariable Long uid,
+    @PutMapping("update")
+    @CrossOrigin(origins = "http://localhost:8081")
+    public ApiResponse updateUser(@RequestParam Long uid,
                                           @RequestParam String phone,
-                                          @RequestParam String role,
-                                          @RequestParam String password,
-                                          @RequestParam String username,
-                                          @RequestParam String number_plate,
-                                          @RequestParam String vehicle_type,
-                                          @RequestParam Double total_trip_length,
-                                          @RequestParam String province,
-                                          @RequestParam String city) {
+                                          @RequestParam(required = false) String role,
+                                          @RequestParam(required = false) String password,
+                                          @RequestParam(required = false) String username,
+                                          @RequestParam(required = false) String numberPlate,
+                                          @RequestParam(required = false) String vehicleType,
+                                          @RequestParam(required = false) Double totalTripLength,
+                                          @RequestParam(required = false) String province,
+                                          @RequestParam(required = false) String city) {
         return userService.updateUser(uid,
                 phone,
                 role,
                 password,
                 username,
-                number_plate,
-                vehicle_type,
-                total_trip_length,
+                numberPlate,
+                vehicleType,
+                totalTripLength,
                 province,city);
     }
 

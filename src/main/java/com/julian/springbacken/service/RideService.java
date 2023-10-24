@@ -17,7 +17,7 @@ public interface RideService extends IService<RideEntity> {
                            Double destLat,
                            String destResolvedAddress,
                            String ride_type) throws Exception;
-    public void updateRide(Long rid,
+    void updateRide(Long rid,
                            Long driver_uid,
                            String mqtt_channel_name,
                            String status,
@@ -27,6 +27,8 @@ public interface RideService extends IService<RideEntity> {
                            LocalDateTime trip_cancellation_time,
                            Double total_trip_distance,
                            Long oid) throws Exception;
-    public ApiResponse getRide(Long rid);
+    ApiResponse getRide(Long rid);
+
+    RideEntity getRideByID(Long rid);
 }
 
