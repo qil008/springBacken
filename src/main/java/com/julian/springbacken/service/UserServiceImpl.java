@@ -169,7 +169,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
                 );
                 String topic = province + "-" + city;
                 mqttPushClient.publish(2,false,topic,pushMessage);
-                return new ApiResponse("0", "Success");
+                return new ApiResponse("0", rid.toString());
             } catch (Exception e) {
                 return new ApiResponse("500", "Server error: " + e.getMessage());
             }

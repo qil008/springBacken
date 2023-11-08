@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
     // POST /user
     @PostMapping("/signUp")
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "*")
     public ApiResponse createUser(@RequestParam String phone,
                                   @RequestParam String password,
                                   @RequestParam(required = false) String username,
@@ -27,7 +27,7 @@ public class UserController {
 
     // GET /login
     @GetMapping("/login")
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "*")
     public ApiResponse login(@RequestParam String phone,
                              @RequestParam String password) {
         return userService.getUser(phone);
@@ -35,7 +35,7 @@ public class UserController {
 
     // PUT /user/{uid}
     @PutMapping("update")
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "*")
     public ApiResponse updateUser(@RequestParam Long uid,
                                           @RequestParam String phone,
                                           @RequestParam(required = false) String role,

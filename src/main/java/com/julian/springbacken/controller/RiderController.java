@@ -7,7 +7,8 @@ import com.julian.springbacken.service.RideService;
 import com.julian.springbacken.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public class RiderController {
     @Autowired
     private UserService userService;
     @PostMapping("/post")
+    @CrossOrigin(origins = "*")
     // 乘客发单
     public ApiResponse postRide(@RequestParam Long uid,
                                 @RequestParam Double pickUpLong,
@@ -43,7 +45,7 @@ public class RiderController {
     }
 
     @PutMapping("/accept")
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "*")
     // 司机接单
     public ApiResponse acceptRide(@RequestParam Long rid,
                                   @RequestParam Long uid,
@@ -55,6 +57,7 @@ public class RiderController {
     }
 
     @PutMapping("/cancel")
+    @CrossOrigin(origins = "*")
     // 取消订单
     public ApiResponse cancelRide(@RequestParam Long rid) {
         try{
@@ -77,6 +80,7 @@ public class RiderController {
     }
 
     @GetMapping("/inquire")
+    @CrossOrigin(origins = "*")
     // 查询订单状态
     public ApiResponse getRideStatus(@RequestParam Long rid) {
         RideEntity ride = rideService.getRideByID(rid);
@@ -85,8 +89,11 @@ public class RiderController {
 
         }
         try {
-            String jsonData = new ObjectMapper().writeValueAsString(ride);
-            return new ApiResponse("0", "success");
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+
+            String jsonData = mapper.writeValueAsString(ride);
+            return new ApiResponse("0", jsonData);
         } catch (JsonProcessingException e) {
             return new ApiResponse("010", "Failed to convert user to JSON: " + e.getMessage());
         }
