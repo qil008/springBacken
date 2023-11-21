@@ -30,5 +30,7 @@ public interface RideService extends IService<RideEntity> {
     ApiResponse getRide(Long rid);
 
     RideEntity getRideByID(Long rid);
+
+//    ApiResponse updateDistance(Long rid);
 }
 

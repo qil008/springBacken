@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.julian.springbacken.Entity.RideEntity;
 import com.julian.springbacken.response.ApiResponse;
 import com.julian.springbacken.service.RideService;
+import com.julian.springbacken.service.TrackService;
 import com.julian.springbacken.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ public class RiderController {
     private RideService rideService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TrackService trackService;
     @PostMapping("/post")
     @CrossOrigin(origins = "*")
     // 乘客发单
@@ -54,6 +57,12 @@ public class RiderController {
                                   @RequestParam String numberPlate){
         return userService.acceptRide(rid,uid,province,city,numberPlate);
 
+    }
+
+    @PutMapping("/updateDistance")
+    @CrossOrigin(origins = "*")
+    public ApiResponse updateDistance(@RequestParam Long rid){
+        return trackService.updateDistanceTraveled(rid);
     }
 
     @PutMapping("/cancel")
