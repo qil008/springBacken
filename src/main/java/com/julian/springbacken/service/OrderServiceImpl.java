@@ -54,4 +54,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
             throw new Exception("Failed to create ride: " + e.getMessage(), e);
         }
     }
+
+    public ApiResponse updatePaymentStatus(Long oid){
+        OrderEntity order = getById(oid);
+        order.setStatus("paid");
+        try{
+            updateById(order);
+            return new ApiResponse("0", "Success");
+        }catch (Exception e){
+            return new ApiResponse("500", "Server error: " + e.getMessage());
+        }
+    }
 }
