@@ -87,12 +87,21 @@ CREATE TABLE `order_table` (
     FOREIGN KEY (`rid`) REFERENCES `ride_table`(`rid`)
 );
 
+CREATE TABLE `log_table` (
+    `lid` BIGINT NOT NULL AUTO_INCREMENT,
+    `CreationTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `source` VARCHAR(255), 
+    `level` VARCHAR(255), 
+    `content` TEXT, 
+    PRIMARY KEY (`lid`)
+);
+
 SELECT * FROM `order_table`;
 
 SELECT CONCAT('DROP TABLE IF EXISTS ', table_name, ';') 
 FROM information_schema.tables 
 WHERE table_schema = 'uberinterndemo';
-DROP TABLE `order`;
+DROP TABLE `log`;
 DROP TABLE IF EXISTS `ride`;
 DROP TABLE IF EXISTS `user`;
 DROP DATABASE uberinterndemo;
